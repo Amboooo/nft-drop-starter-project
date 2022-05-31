@@ -1,43 +1,41 @@
-import React ,{useState, useEffect} from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.css';
 import twitterLogo from './assets/twitter-logo.svg';
-import CandyMachine from './CandyMachine';
+import CandyMachine from "./CandyMachine";
 
 // Constants
-const TWITTER_HANDLE = '_buildspace';
+const TWITTER_HANDLE = 'stevedsimkins';
 const TWITTER_LINK = `https://twitter.com/${TWITTER_HANDLE}`;
 
 const App = () => {
 
-  const [walletAddress, setWalletAddress] = useState(null);
+  //State 
+  const [walletAddress, setWalletAddress] = useState();
 
-  const connectIfPhantomAvailable = async() => {
+  const checkIfWalletIsConnected = async () => {
     try {
-      const {solana} = window;
-      if(solana && solana.isPhantom) {
-        console.log("Phantom wallet is there! 🚀")
-        const response = await solana.connect({ onlyIfTrusted: true })
-        console.log("user's wallet address: ", response.publicKey.toString())
-        setWalletAddress(response.publicKey.toString());
-      }else {
-        console.log(":( No solana or phantom here :(")
-      }
-    }catch(err) {
-      console.error(err)
-    }
-  }
+      const { solana } = window;
 
-  useEffect(() => {
-    const onLoad = async () => {
-      await connectIfPhantomAvailable();
-    };
-    window.addEventListener("load", () => {
-      onLoad()
-    })
-    return () => {
-      window.removeEventListener("load",onLoad)
+      if (solana) {
+        if (solana.isPhantom) {
+          console.log('Phantom wallet found!');
+
+          const response = await solana.connect({ onlyIfTrusted: true });
+          console.log(
+            'Connected with Public Key:',
+            response.publicKey.toString()
+          );
+
+          setWalletAddress(response.publicKey.toString());
+        }
+      } else {
+        alert('Solana object not found! Get a Phantom Wallet 👻');
+      }
+    } catch (error) {
+      console.error(error);
     }
-  },[])
+  };
+
 
   const connectWallet = async () => {
     const { solana } = window;
@@ -48,7 +46,7 @@ const App = () => {
       setWalletAddress(response.publicKey.toString());
     }
   };
-  
+
   const renderNotConnectedContainer = () => (
     <button
       className="cta-button connect-wallet-button"
@@ -58,12 +56,23 @@ const App = () => {
     </button>
   );
 
+
+
+
+  useEffect(() => {
+    const onLoad = async () => {
+      await checkIfWalletIsConnected();
+    };
+    window.addEventListener('load', onLoad);
+    return () => window.removeEventListener('load', onLoad);
+  }, []);
+
   return (
     <div className="App">
       <div className="container">
         <div className="header-container">
-          <p className="header">🍭 Candy Drop</p>
-          <p className="sub-text">NFT drop machine with fair mint</p>
+          <p className="header">🎃 Solana Trick or Treat 🎃</p>
+          <p className="sub-text">A limited edition NFT drop that could result in tasty candy, or a rock</p>
           {!walletAddress && renderNotConnectedContainer()}
           {walletAddress && <CandyMachine walletAddress={window.solana} />}
         </div>
@@ -74,7 +83,7 @@ const App = () => {
             href={TWITTER_LINK}
             target="_blank"
             rel="noreferrer"
-          >{`built on @${TWITTER_HANDLE}`}</a>
+          >{`built by @${TWITTER_HANDLE}`}</a>
         </div>
       </div>
     </div>
