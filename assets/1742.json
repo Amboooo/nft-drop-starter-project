@@ -1,0 +1,54 @@
+{
+  "name": "MoonApes #1742",
+  "symbol": "MAS",
+  "description": "Carrying the culture💫🐵 Collection of 4444 MoonApes",
+  "seller_fee_basis_points": 250,
+  "image": "1742.png",
+  "external_url": "NaN",
+  "edition": 1742,
+  "attributes": [
+    {
+      "trait_type": "Background",
+      "value": "Green"
+    },
+    {
+      "trait_type": "Body",
+      "value": "Brown"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "Eyes"
+    },
+    {
+      "trait_type": "Eyegear",
+      "value": "Shades"
+    },
+    {
+      "trait_type": "Onwear",
+      "value": "Hawaiianshirt"
+    },
+    {
+      "trait_type": "Headwear",
+      "value": "Satan"
+    },
+    {
+      "trait_type": "Mouths",
+      "value": "Normal"
+    }
+  ],
+  "properties": {
+    "files": [
+      {
+        "uri": "1742.png",
+        "type": "image/png"
+      }
+    ],
+    "category": "image",
+    "creators": [
+      {
+        "address": "2kNdEMkdhqStu8uTnM6p1jHooQo7zhMpHS6RvLvyX4Dq",
+        "share": 100
+      }
+    ]
+  }
+}
